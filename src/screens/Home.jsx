@@ -21,11 +21,17 @@ function Home() {
     { key: 3, color: 'green', isOn: false },
   ]);
 
+  const toggle = (lightKey) => {
+    setLightsStates(
+      lightsStates.map( (light) => ( light.key === lightKey ? { ...light, isOn: true } : { ...light, isOn: false } ) ),
+    );
+  };
+
   return (
     <View style={styles.container} >
       <Box>
         {lightsStates.map( ({ key, color, isOn }) => (
-          <Light key={key} color={color} isOn={isOn} id={key} state={lightsStates} setState={setLightsStates} />
+          <Light key={key} color={color} isOn={isOn} id={key} toggle={toggle} />
         ) )}
       </Box>
     </View>

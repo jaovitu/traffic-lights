@@ -1,4 +1,3 @@
-import React from "react";
 import { StyleSheet, View } from "react-native";
 
 const colors = {
@@ -7,24 +6,8 @@ const colors = {
   green: { colorOn: 'rgba(0, 255, 0, 1)', colorOff: 'rgba(0, 255, 0, 0.1)' },
 }
 
-function Light({ color, isOn, id, state, setState }) {
-
-  const toggle = () => {
-    const newState = state.map( (light) => {
-      if (light.isOn) {
-        light.isOn = false;
-      }
-
-      if (light.key === id) {
-        light.isOn = true;
-      }
-
-      return light;
-    } );
-
-    setState(newState);
-  };
-
+function Light({ color, isOn, id, toggle }) {
+  
   const { colorOn, colorOff } = colors[color];
 
   const styles = StyleSheet.create({
@@ -40,7 +23,7 @@ function Light({ color, isOn, id, state, setState }) {
   });
 
   return (
-    <View style={styles.lightStyle} onStartShouldSetResponder={() => toggle()} ></View>
+    <View style={styles.lightStyle} onStartShouldSetResponder={() => toggle(id)} ></View>
   );
 }
 
